@@ -196,7 +196,7 @@
 ]
 'repository':
   'keywords':
-    'match': '\\s*-?\\s*(valueFrom:|inputs:|outputs:|arguments:|baseCommand:|cwlVersion:|class:|id:|label:|doc:|stdout:|stderr:|requirements:|dockerPull:|type:|inputBinding:|outputBinding:|position:|prefix:|glob:|secondaryFiles:)'
+    'match': '\\s*-?\\s*(valueFrom:|inputs:|outputs:|arguments:|baseCommand:|cwlVersion:|class:|id:|label:|doc:|stdout:|stderr:|requirements:|dockerPull:|type:|inputBinding:|outputBinding:|position:|prefix:|glob:|secondaryFiles:|steps:|in:|out:|run:|expression:|source:|types:|expressionLib:|outputSource:|scatter:|items:|default:)'
     'captures':
       '1':
         'name': 'keyword.toolinput.cwl'
