@@ -1,0 +1,368 @@
+'scopeName': 'source.cwl'
+'name': 'CWL'
+'fileTypes': [
+  'cwl'
+]
+'patterns': [
+  {
+    'include': '#javascript'
+  }
+  {
+    'include': '#keywords'
+  }
+  {
+    'include': '#types'
+  }
+  {
+    'include': '#comment'
+  }
+  {
+    'match': '\\t+'
+    'name': 'invalid.illegal.whitespace.cwl'
+  }
+  {
+    'match': '^---'
+    'name': 'punctuation.definition.directives.end.cwl'
+  }
+  {
+    'match': '^\\.\\.\\.'
+    'name': 'punctuation.definition.document.end.cwl'
+  }
+  {
+    # hello: >
+    # hello: |
+    'begin': '^(\\s*)(?!-\\s*)(.*\\S)\\s*(:)(?:\\s+((!)[^!\\s]+))?\\s+(?=\\||>)'
+    'beginCaptures':
+      '2':
+        'name': 'entity.name.tag.cwl'
+      '3':
+        'name': 'punctuation.separator.key-value.cwl'
+      '4':
+        'name': 'keyword.other.tag.local.cwl'
+      '5':
+        'name': 'punctuation.definition.tag.local.cwl'
+    'end': '^(((?!$)(?!\\1\\s+))|(?=\\1\\s*(-|[^!@#%&*>,].*:\\s+)))'
+    'contentName': 'string.unquoted.block.cwl'
+    'patterns': [
+      {
+        'include': '#constants'
+      }
+      {
+        'include': '#javascript'
+      }
+      {
+        'include': '#keywords'
+      }
+    ]
+  }
+  {
+    # - >
+    # - |
+    # - hello: >
+    # - hello: |
+    'begin': '^(\\s*)(?:(-)|(?:(?:(-)\\s*)?(.*\\S)\\s*(:)))(?:\\s+((!)[^!\\s]+))?\\s+(?=\\||>)'
+    'beginCaptures':
+      '2':
+        'name': 'punctuation.definition.entry.cwl'
+      '3':
+        'name': 'punctuation.definition.entry.cwl'
+      '4':
+        'name': 'entity.name.tag.cwl'
+      '5':
+        'name': 'punctuation.separator.key-value.cwl'
+      '6':
+        'name': 'keyword.other.tag.local.cwl'
+      '7':
+        'name': 'punctuation.definition.tag.local.cwl'
+    'end': '^(((?!$)(?!\\1\\s+))|(?=\\1\\s*(-|[^!@#%&*>,].*:\\s+)))'
+    'contentName': 'string.unquoted.block.cwl'
+    'patterns': [
+      {
+        'include': '#constants'
+      }
+      {
+        'include': '#javascript'
+      }
+      {
+        'include': '#keywords'
+      }
+    ]
+  }
+  {
+    # << : *variableToMerge
+    'match': '(<<)\\s*(:)\\s+(.+)$'
+    'captures':
+      '1':
+        'name': 'entity.name.tag.merge.cwl'
+      '2':
+        'name': 'punctuation.separator.key-value.cwl'
+      '3':
+        'patterns': [
+          {
+            'include': '#variables'
+          }
+        ]
+  }
+  {
+    # - hello:
+    # look at me go:
+    # omap time: !!omap
+    'begin': '(?>^(\\s*)(-)?\\s*)([^!{@#%&*>,\'"][^#]*?)(:)\\s+((!!)omap)?'
+    'beginCaptures':
+      '2':
+        'name': 'punctuation.definition.entry.cwl'
+      '3':
+        'name': 'entity.name.tag.cwl'
+      '4':
+        'name': 'punctuation.separator.key-value.cwl'
+      '5':
+        'name': 'keyword.other.omap.cwl'
+      '6':
+        'name': 'punctuation.definition.tag.omap.cwl'
+    'end': '^((?!\\1\\s+)|(?=\\1\\s*(-|[^!@#%&*>,].*:\\s+|#)))'
+    'patterns': [
+      {
+        'include': '#scalar-content'
+      }
+    ]
+  }
+  {
+    # - 'quoted':
+    # "quoted":
+    # "with omap": !!omap
+    'begin': '^(\\s*)(-)?\\s*(?:((\')([^\']*?)(\'))|((")([^"]*?)(")))(:)\\s+((!!)omap)?'
+    'beginCaptures':
+      '2':
+        'name': 'punctuation.definition.entry.cwl'
+      '3':
+        'name': 'string.quoted.single.cwl'
+      '4':
+        'name': 'punctuation.definition.string.begin.cwl'
+      '5':
+        'name': 'entity.name.tag.cwl'
+      '6':
+        'name': 'punctuation.definition.string.end.cwl'
+      '7':
+        'name': 'string.quoted.double.cwl'
+      '8':
+        'name': 'punctuation.definition.string.begin.cwl'
+      '9':
+        'name': 'entity.name.tag.cwl'
+      '10':
+        'name': 'punctuation.definition.string.end.cwl'
+      '11':
+        'name': 'punctuation.separator.key-value.cwl'
+      '12':
+        'name': 'keyword.other.omap.cwl'
+      '13':
+        'name': 'punctuation.definition.tag.omap.cwl'
+    'end': '^((?!\\1\\s+)|(?=\\1\\s*(-|[^!@#%&*>,].*:\\s+|#)))'
+    'patterns': [
+      {
+        'include': '#scalar-content'
+      }
+    ]
+  }
+  {
+    # - stuff
+    # - !!omap
+    # -
+    'begin': '^(\\s*)(-)\\s+(?:((!!)omap)|((!)[^!\\s]+)|(?![!@#%&*>,]))'
+    'beginCaptures':
+      '2':
+        'name': 'punctuation.definition.entry.cwl'
+      '3':
+        'name': 'keyword.other.omap.cwl'
+      '4':
+        'name': 'punctuation.definition.tag.omap.cwl'
+      '5':
+        'name': 'keyword.other.tag.local.cwl'
+      '6':
+        'name': 'punctuation.definition.tag.local.cwl'
+    'end': '^((?!\\1\\s+)|(?=\\1\\s*(-|[^!@#%&*>,].*:\\s+|#)))'
+    'patterns': [
+      {
+        'include': '#scalar-content'
+      }
+
+    ]
+  }
+  {
+    'include': '#variables'
+  }
+  {
+    'include': '#strings'
+  }
+]
+'repository':
+  'keywords':
+    'match': '\\s*-?\\s*(valueFrom:|inputs:|outputs:|arguments:|baseCommand:|cwlVersion:|class:|id:|label:|doc:|stdout:|stderr:|requirements:|dockerPull:|type:|inputBinding:|outputBinding:|position:|prefix:|glob:|secondaryFiles:)'
+    'captures':
+      '1':
+        'name': 'keyword.toolinput.cwl'
+  'types':
+    'match': '(string|File(\\[\\])?|null|boolean|int|long|float|double|Directory(\\[\\])?)'
+    'captures':
+      '1':
+        'name': 'keyword.type.cwl'
+  'comment':
+    'match': '(?<=^|\\s)((#(?!{)).*)'
+    'captures':
+      '1':
+        'name': 'comment.line.number-sign.cwl'
+      '2':
+        'name': 'punctuation.definition.comment.cwl'
+  'constants':
+    'match': '(?<=\\s)(true|false|null|True|False|Null|TRUE|FALSE|NULL|~)(?=\\s*$)'
+    'name': 'constant.language.cwl'
+  'date':
+    'match': '([0-9]{4}-[0-9]{2}-[0-9]{2})\\s*($|(?=#)(?!#{))'
+    'captures':
+      '1':
+        'name': 'constant.other.date.cwl'
+  'javascript':
+    'begin': '(\\$(\\{|\\())'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.embedded.begin.javascript'
+    'contentName': 'source.js'
+    'end': '(\\}|\\))'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.embedded.end.javascript'
+    'name': 'meta.embedded.line.javascript'
+    'patterns': [
+      {
+        'include': 'source.js'
+      }
+    ]
+  'escaped_char':
+    # http://yaml.org/spec/1.2/spec.html#id2776092
+    'patterns': [
+      {
+        'match': '\\\\u[A-Fa-f0-9]{4}'
+        'name': 'constant.character.escape.cwl'
+      }
+      {
+        'match': '\\\\U[A-Fa-f0-9]{8}'
+        'name': 'constant.character.escape.cwl'
+      }
+      {
+        'match': '\\\\x[0-9A-Fa-f]{2}'
+        'name': 'constant.character.escape.cwl'
+      }
+      {
+        'match': '\\\\[0abtnvfre "/\\\\N_LP]' # Space is intentional
+        'name': 'constant.character.escape.cwl'
+      }
+      {
+        'match': '\\\\(u.{4}|U.{8}|x.{2}|.)'
+        'name': 'invalid.illegal.escape.cwl'
+      }
+    ]
+  'numeric':
+    'match': '(((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?)\\s*($|(?=#)(?!#{))'
+    'captures':
+      '1':
+        'name': 'constant.numeric.cwl'
+  'strings':
+    'patterns': [
+      {
+        'begin': '"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cwl'
+        'end': '"'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cwl'
+        'name': 'string.quoted.double.cwl'
+        'patterns': [
+          {
+            'include': '#escaped_char'
+          }
+          {
+            'include': '#javascript'
+          }
+        ]
+      }
+      {
+        # Per http://www.yaml.org/spec/1.2/spec.html#id2788097, only single quotes can be escaped
+        'begin': "'"
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cwl'
+        'end': "'"
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cwl'
+        'name': 'string.quoted.single.cwl'
+        'applyEndPatternLast': true
+        'patterns': [
+          {
+            'match': "''"
+            'name': 'constant.character.escape.cwl'
+          }
+          {
+            'include': '#javascript'
+          }
+        ]
+      }
+      {
+        'begin': '`'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cwl'
+        'end': '`'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cwl'
+        'name': 'string.interpolated.cwl'
+        'patterns': [
+          {
+            'include': '#escaped_char'
+          }
+          {
+            'include': '#javascript'
+          }
+        ]
+      }
+      {
+        'include': '#numeric'
+      }
+      {
+        'match': '[^\\s"\'\\n](?!\\s*#(?!{))([^#\\n]|((?<!\\s)#))*'
+        'name': 'string.unquoted.cwl'
+      }
+    ]
+  'scalar-content':
+    'patterns': [
+      {
+        'include': '#numeric'
+      }
+      {
+        'include': '#comment'
+      }
+      {
+        'match': '!(?=\\s)'
+        'name': 'punctuation.definition.tag.non-specific.cwl'
+      }
+      {
+        'include': '#constants'
+      }
+      {
+        'include': '#date'
+      }
+      {
+        'include': '#strings'
+      }
+    #   {
+    #     'include': '#types'
+    #   }
+    ]
+  'variables':
+    'captures':
+      '1':
+        'name': 'punctuation.definition.variable.cwl'
+    'match': '(&|\\*)\\w+$'
+    'name': 'variable.other.cwl'

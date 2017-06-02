@@ -1,0 +1,9 @@
+{
+    "name": "language-cwl",
+    "version": "0.0.1",
+    "description": "CWL language support in Atom",
+    "engines": {
+        "atom": "*",
+        "node": "*"
+    }
+}
