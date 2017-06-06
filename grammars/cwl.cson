@@ -14,6 +14,9 @@
     'include': '#types'
   }
   {
+    'include': '#requirements'
+  }
+  {
     'include': '#comment'
   }
   {
@@ -53,6 +56,9 @@
       {
         'include': '#keywords'
       }
+      {
+        'include': '#requirements'
+      }
     ]
   }
   {
@@ -85,6 +91,9 @@
       }
       {
         'include': '#keywords'
+      }
+      {
+        'include': '#requirements'
       }
     ]
   }
@@ -196,7 +205,7 @@
 ]
 'repository':
   'keywords':
-    'match': '\\s*-?\\s*(valueFrom:|inputs:|outputs:|arguments:|baseCommand:|cwlVersion:|class:|id:|label:|doc:|stdout:|stderr:|requirements:|dockerPull:|type:|inputBinding:|outputBinding:|position:|prefix:|glob:|secondaryFiles:|steps:|in:|out:|run:|expression:|source:|types:|expressionLib:|outputSource:|scatter:|items:|default:)'
+    'match': '\\s*-?\\s*(valueFrom:|in(puts)?:|out(puts)?:|arguments:|baseCommand:|cwlVersion:|class:|id:|label:|doc:|std(out:|err:)|requirements:|dockerPull:|type:|(in|out)putBinding:|position:|prefix:|glob:|secondaryFiles:|steps:|run:|expression:|types:|expressionLib:|(outputS|s)ource:|scatter:|items:|default:)'
     'captures':
       '1':
         'name': 'keyword.toolinput.cwl'
@@ -205,6 +214,11 @@
     'captures':
       '1':
         'name': 'keyword.type.cwl'
+  'requirements':
+    'match': '\\s+([a-zA-Z0-9]+Requirement)'
+    'captures':
+      '1':
+        'name': 'keyword.requirement.cwl'
   'comment':
     'match': '(?<=^|\\s)((#(?!{)).*)'
     'captures':
@@ -221,12 +235,12 @@
       '1':
         'name': 'constant.other.date.cwl'
   'javascript':
-    'begin': '(\\$(\\{|\\())'
+    'begin': '\\$(\\{|\\()'
     'beginCaptures':
       '0':
         'name': 'punctuation.definition.embedded.begin.javascript'
     'contentName': 'source.js'
-    'end': '(\\}|\\))'
+    'end': '\\}|\\)'
     'endCaptures':
       '0':
         'name': 'punctuation.definition.embedded.end.javascript'
@@ -354,11 +368,11 @@
         'include': '#date'
       }
       {
+        'include': '#types'
+      }
+      {
         'include': '#strings'
       }
-    #   {
-    #     'include': '#types'
-    #   }
     ]
   'variables':
     'captures':

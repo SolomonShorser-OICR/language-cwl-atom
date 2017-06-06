@@ -85,6 +85,9 @@ arguments:
       position: 6
     valueFrom: $( inputs.indel-padding.replace("123","456") )
       position: 7
+    valueFrom: |
+        $( { svs_for_merge: filterFor("embl-delly",".sv.",inputs.in_vcf) } )
+      position: 8
 
 outputs:
     - id: "#minibam"
