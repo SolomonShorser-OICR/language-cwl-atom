@@ -28,12 +28,12 @@ stderr: stderr.txt
 
 inputs:
     - id: "#input-bam"
-      type: File
+      type: File?
       inputBinding:
         position: 1
         # prefix: "-i"
     - id: "#outfile"
-      type: string
+      type: Any[]?
       inputBinding:
         position: 2
         # prefix: "-o"
