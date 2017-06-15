@@ -205,12 +205,12 @@
 ]
 'repository':
   'keywords':
-    'match': '\\s*-?\\s*(valueFrom:|in(puts)?:|out(puts)?:|arguments:|baseCommand:|cwlVersion:|class:|id:|label:|doc:|std(out:|err:)|requirements:|dockerPull:|type:|(in|out)putBinding:|position:|prefix:|glob:|secondaryFiles:|steps:|run:|expression:|types:|expressionLib:|(outputS|s)ource:|scatter:|items:|default:)'
+    'match': '\\s*-?\\s*(valueFrom:|(in|out)(puts)?:|arguments:|baseCommand:|cwlVersion:|class:|id:|label:|doc:|std(out:|err:)|requirements:|dockerPull:|type:|(in|out)putBinding:|position:|prefix:|glob:|secondaryFiles:|steps:|run:|expression:|types:|expressionLib:|(outputS|s)ource:|scatter:|items:|default:)'
     'captures':
       '1':
         'name': 'keyword.toolinput.cwl'
   'types':
-    'match': '(string|File(\\[\\])?|null|boolean|int|long|float|double|Directory(\\[\\])?)'
+    'match': '((string|File|null|Any|boolean|int|long|float|double|Directory)(\\[\\])?\\??)'
     'captures':
       '1':
         'name': 'keyword.type.cwl'
