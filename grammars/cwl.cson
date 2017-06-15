@@ -210,7 +210,7 @@
       '1':
         'name': 'keyword.toolinput.cwl'
   'types':
-    'match': '((string|File|null|Any|boolean|int|long|float|double|Directory)(\\[\\])?\\??)'
+    'match': '((string|File|null|Any|boolean|int|long|float|double|Directory)(\\[\\])?\\??(\\s+|$))'
     'captures':
       '1':
         'name': 'keyword.type.cwl'

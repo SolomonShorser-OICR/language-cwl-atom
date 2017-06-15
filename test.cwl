@@ -58,6 +58,9 @@ inputs:
       type: string
     - id: "#indel-padding"
       type: string
+    null_filter:
+      type: null_thing
+
 
 arguments:
     valueFrom: |
